@@ -37,7 +37,7 @@ class Image
     {
         return $this->id;
     }
-
+//for test
     public function getUrl(): ?string
     {
         return $this->url;
