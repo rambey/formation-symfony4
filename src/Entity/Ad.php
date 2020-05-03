@@ -113,6 +113,29 @@ class Ad
         }
 
     }
+
+    /**
+     * permet d'obtenir un tableau des jours indiposnibes pour l'annonce
+     * @return array Un tableau dateTime representant les jours d'occupation
+     *
+     */
+    public  function  getNotAvailableDays(){
+        $notAvailableDays = [];
+        foreach ($this->bookings as $booking){
+            //Caclculer les jours qui se trouvent entre les 2 dates
+
+            $resultat = range($booking->getStartDate()->getTimestamp(), $booking->getEndDate()->getTimestamp() ,
+             24 * 60 * 60
+            );
+
+            $days = array_map(function ($dayTimestamp){
+                return new \DateTime(date('Y-m-d' , $dayTimestamp));
+            } , $resultat);
+
+            $notAvailableDays = array_merge($notAvailableDays , $days);
+        }
+        return $notAvailableDays ;
+    }
     public function getId(): ?int
     {
         return $this->id;

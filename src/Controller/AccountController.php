@@ -145,4 +145,13 @@ class AccountController extends AbstractController
         }
 
     }
+
+    /**
+     * permet la liste des resvations d'un utilisateur
+     * @Route("/account/bookings" , name="account_bookings")
+     * @return Response
+     */
+    public function bookings(){
+        return $this->render('account/bookings.html.twig');
+    }
 }
