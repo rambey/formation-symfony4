@@ -93,10 +93,16 @@ class Ad
      */
     private $bookings;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="ad", orphanRemoval=true)
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->bookings = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -114,6 +120,31 @@ class Ad
 
     }
 
+    /**
+     * Permte de recupérer le commenatire d'un auteur
+     * @param User $author
+     * @return  Comment|null
+     */
+    public function getCommentFromAuthor(User $author){
+       foreach ($this->comments as $comment){
+           if($comment->getAuthor() === $author) return $comment;
+       }
+       return null ;
+    }
+
+    /**
+     * Permet d'obtenir la moyene des avis pour une annonce
+     *
+     * @return float|int
+     */
+    public function  getAvgRating(){
+        $sum= array_reduce($this->comments->toArray() , function ($total , $comment){
+                  return $total + $comment->getRating();
+        } , 0);
+        if(count($this->comments) >0 ){
+            return $sum / count($this->comments);
+        }
+    }
     /**
      * permet d'obtenir un tableau des jours indiposnibes pour l'annonce
      * @return array Un tableau dateTime representant les jours d'occupation
@@ -293,6 +324,37 @@ class Ad
             // set the owning side to null (unless already changed)
             if ($booking->getAd() === $this) {
                 $booking->setAd(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setAd($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getAd() === $this) {
+                $comment->setAd(null);
             }
         }
 

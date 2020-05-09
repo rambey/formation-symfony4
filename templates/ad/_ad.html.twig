@@ -2,8 +2,11 @@
 <div class="col-md-4">
     <div class="card bg-light mb-3">
         <div class="card-header text-center">
-            {{ad.rooms}} chambres</ch> , <strong>{{ad.price}} &euro; / nuit</strong><br>
-            <small>pas enore noté</small>
+            {{ad.rooms}} chambres</ch> , <strong>{{ad.price| number_format(2, ',' , ' ') }} &euro; / nuit</strong><br>
+            <small>
+                    {%  include 'partials/rating.html.twig'  with {'rating': ad.avgRating } %}
+
+            </small>
         </div>
         <a href="{{ ad_url }}">
             <img src="{{ ad.coverImage }}" alt="image de l'apprtement" style="height: 200px ;width: 100%;display: block;">
@@ -15,7 +18,8 @@
             <p class="card-text">
                 {{ ad.introduction }}
             </p>
-            <a href="{{ ad_url }}" class="btn btn-secondary">En savoir plus !</a>
+
+            <a href="{{ ad_url }}" class="btn btn-primary">En savoir plus !</a>
             {% if app.user and app.user == ad.author %}
                 <a href="{{ path('ads_edit' , {'slug' :ad.slug}) }}" class="btn btn-primary">Modifier l'annonce</a>
             {% endif %}

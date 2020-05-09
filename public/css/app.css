@@ -11,6 +11,12 @@ div.ad-title p {
   color: white;
     text-shadow: 3px 3px 3px rgba(0,0,0,5);
 }
+
+div.ad-title .btn{
+  margin-top: 2em;
+  font-size: 1.5em;
+  line-height: 1.5em;
+}
 div.carousel-caption{
   text-shadow: 3px 3px 3px rgba(0,0,0,5) ;
 }
@@ -39,4 +45,15 @@ img.avatar-mini {
 }
 span.form-error-icon.badge.badge-danger.text-uppercase {
   display: none;
+}
+
+span.rating i {
+  color: goldenrod;
+}
+
+.alert a{
+  text-decoration: none;
+}
+.alert .btn{
+  color: white;
 }
