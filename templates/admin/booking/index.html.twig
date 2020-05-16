@@ -16,10 +16,10 @@
            <th></th>
        </thead>
         <tbody>
-        {% for booking in bookings %}
+        {% for booking in pagination.data %}
           <tr>
               <td>{{ booking.id }}</td>
-              <td>{{ booking.createdAt|date('d/m/Y H:i') }}</td>
+              <td>{{ booking.createdAt|date('d/m/Y') }}</td>
               <td>
                   <img src="{{ booking.booker.picture }}" class="img-fluid avatar-mini" alt="image de {{ booking.booker.fullName }}">
                   {{ booking.booker.fullName }}
@@ -39,6 +39,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {{pagination.display()}}
 
 </div>
 {% endblock %}
