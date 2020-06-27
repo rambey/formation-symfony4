@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <meta charset="UTF-8">
     <title>SymBNB - {% block title %}Welcome!{% endblock %}</title>
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/css/app.css">
-    <link rel="stylesheet" href="/css/bootstrap-datepicker.min.css">
+
+    <link rel="stylesheet" href="{{ asset('build/app.css') }}">
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css" integrity="sha256-h20CPZ0QyXlBuAw7A+KluUYx/3pK+c7lYEpqLTlxjYQ=" crossorigin="anonymous" />
     <meta name="viewport" content="width=device-width ,user-scalable=no">
     {% block stylesheets %}{% endblock %}

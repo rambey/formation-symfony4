@@ -1,3 +1,6 @@
+@import url('./bootstrap.min.css');
+
+
 div.container ,
 div.container-fluid {
   margin-top: 20px;
